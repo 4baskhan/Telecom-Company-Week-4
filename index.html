@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TeleConnect Pro — Staff Sign In</title>
+<meta name="description" content="Staff and admin portal for TeleConnect Pro telecom operations." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2305070a%22/><text x=%2250%22 y=%2266%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%2323e6ff%22>◈</text></svg>" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+<canvas id="network-canvas" aria-hidden="true"></canvas>
+<div id="toast-stack" aria-live="polite"></div>
+
+<div class="auth-shell">
+
+  <!-- Brand panel -->
+  <aside class="auth-brand">
+    <div class="brand-mark">
+      <div class="logo-bars"><span></span><span></span><span></span><span></span></div>
+      <span class="brand-name">TELECONNECT PRO</span>
+    </div>
+
+    <div class="auth-brand-hero">
+      <span class="eyebrow">// Staff Operations Console</span>
+      <h1>Every connection.<br />Every customer.<br /><span class="accent">One signal.</span></h1>
+      <p>
+        Manage customer accounts and service orders across the network from a single,
+        secure operations console built for telecom staff and administrators.
+      </p>
+    </div>
+
+    <div class="brand-stats">
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Network Uptime</div>
+      </div>
+      <div>
+        <div class="stat-num">JWT</div>
+        <div class="stat-label">Secured Access</div>
+      </div>
+      <div>
+        <div class="stat-num">REST</div>
+        <div class="stat-label">API Backend</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Form panel -->
+  <main class="auth-form-panel">
+    <div class="auth-card">
+      <span class="kicker">Staff Portal</span>
+      <h2 class="glow-text" id="form-heading">Sign in to your console</h2>
+      <p class="subtitle" id="form-subtitle">Enter your credentials to access customer and order records.</p>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" data-tab="login">Sign In</button>
+        <button type="button" class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+
+      <div class="auth-alert" id="auth-alert" role="alert"></div>
+
+      <!-- Login form -->
+      <form id="login-form" class="auth-form active" novalidate>
+        <div class="field" id="login-email-field">
+          <label for="login-email">Work email</label>
+          <input type="email" id="login-email" autocomplete="username" placeholder="you@teleconnect.com" required />
+          <div class="field-error">Enter a valid email address.</div>
+        </div>
+        <div class="field" id="login-password-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" required />
+          <div class="field-error">Password is required.</div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="login-submit">
+          <span class="btn-label">Sign In</span>
+        </button>
+      </form>
+
+      <!-- Register form -->
+      <form id="register-form" class="auth-form" novalidate>
+        <div class="field" id="reg-name-field">
+          <label for="reg-name">Full name</label>
+          <input type="text" id="reg-name" autocomplete="name" placeholder="Jane Doe" required />
+          <div class="field-error">Name must be at least 2 characters.</div>
+        </div>
+        <div class="field" id="reg-email-field">
+          <label for="reg-email">Work email</label>
+          <input type="email" id="reg-email" autocomplete="username" placeholder="you@teleconnect.com" required />
+          <div class="field-error">Enter a valid email address.</div>
+        </div>
+        <div class="field" id="reg-department-field">
+          <label for="reg-department">Department</label>
+          <select id="reg-department">
+            <option value="Customer Care">Customer Care</option>
+            <option value="Network Operations">Network Operations</option>
+            <option value="Billing">Billing</option>
+            <option value="Field Service">Field Service</option>
+            <option value="Management">Management</option>
+          </select>
+        </div>
+        <div class="field" id="reg-password-field">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" autocomplete="new-password" placeholder="Min. 8 characters, 1 number" required />
+          <div class="field-error">Password must be at least 8 characters and include a number.</div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%" id="register-submit">
+          <span class="btn-label">Create Staff Account</span>
+        </button>
+      </form>
+
+      <div class="demo-creds">
+        <strong>Demo access</strong> — after running <span class="text-mono">npm run seed</span> on the backend:<br />
+        Admin: <span class="text-mono">admin@teleconnect.com</span> / <span class="text-mono">Admin@12345</span><br />
+        Staff: <span class="text-mono">staff@teleconnect.com</span> / <span class="text-mono">Staff@12345</span>
+      </div>
+
+      <p class="form-footnote">TeleConnect Pro Staff Console · Authorized personnel only</p>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/network-bg.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

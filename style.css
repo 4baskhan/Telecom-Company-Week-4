@@ -1,0 +1,277 @@
+/* ============================================================
+   TeleConnect Pro — Design Tokens
+   Theme: near-black telecom command-center, glowing signal-cyan
+   accent, geometric display type paired with a clean body face.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Color */
+  --bg: #05070a;
+  --bg-elevated: #0a0e14;
+  --bg-panel: #0d1219;
+  --bg-panel-hover: #111826;
+  --border: #1b2432;
+  --border-bright: #263447;
+
+  --text-primary: #eef3f8;
+  --text-secondary: #a9b6c4;
+  --text-muted: #6b7789;
+
+  --signal-cyan: #23e6ff;
+  --signal-cyan-dim: #0f8fa8;
+  --signal-white: #f6fbff;
+  --signal-violet: #8b6bff;
+
+  --success: #29e6a0;
+  --warning: #ffb545;
+  --danger: #ff5b74;
+
+  /* Typography */
+  --font-display: 'Orbitron', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --sidebar-w: 250px;
+  --topbar-h: 68px;
+
+  /* Glow */
+  --glow-cyan: 0 0 6px rgba(35, 230, 255, 0.55), 0 0 22px rgba(35, 230, 255, 0.25);
+  --glow-cyan-soft: 0 0 14px rgba(35, 230, 255, 0.18);
+  --glow-white: 0 0 10px rgba(246, 251, 255, 0.65), 0 0 28px rgba(246, 251, 255, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(35, 230, 255, 0.25);
+  color: #fff;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1c2634; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #263447; }
+
+/* Focus visibility for keyboard users */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--signal-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Glowing text utility (the signature typography treatment) ── */
+.glow-text {
+  color: var(--signal-white);
+  text-shadow: var(--glow-white);
+}
+
+.glow-cyan {
+  color: var(--signal-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.text-mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+/* ── Network node background canvas (signature signal-graph motif) ── */
+#network-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--signal-cyan), var(--signal-cyan-dim));
+  color: #04161b;
+  box-shadow: var(--glow-cyan-soft);
+}
+.btn-primary:hover { box-shadow: var(--glow-cyan); filter: brightness(1.08); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+.btn-ghost:hover { border-color: var(--signal-cyan); color: var(--signal-cyan); }
+
+.btn-danger {
+  background: rgba(255, 91, 116, 0.12);
+  color: var(--danger);
+  border-color: rgba(255, 91, 116, 0.35);
+}
+.btn-danger:hover { background: rgba(255, 91, 116, 0.22); }
+
+.btn-sm { padding: 7px 14px; font-size: 0.8rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Form elements ── */
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--signal-cyan);
+  box-shadow: 0 0 0 3px rgba(35, 230, 255, 0.12);
+  outline: none;
+}
+
+.field textarea { resize: vertical; min-height: 80px; }
+.field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; }
+.field-error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  margin-top: 6px;
+  display: none;
+}
+.field.has-error input, .field.has-error select { border-color: var(--danger); }
+.field.has-error .field-error { display: block; }
+
+/* ── Badges / status pills ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.badge-active, .badge-completed { background: rgba(41, 230, 160, 0.12); color: var(--success); border-color: rgba(41,230,160,0.3); }
+.badge-pending { background: rgba(255, 181, 69, 0.12); color: var(--warning); border-color: rgba(255,181,69,0.3); }
+.badge-inprogress { background: rgba(35, 230, 255, 0.12); color: var(--signal-cyan); border-color: rgba(35,230,255,0.3); }
+.badge-inactive, .badge-cancelled, .badge-suspended { background: rgba(255, 91, 116, 0.12); color: var(--danger); border-color: rgba(255,91,116,0.3); }
+
+.priority-Low { color: var(--text-muted); }
+.priority-Medium { color: var(--signal-cyan); }
+.priority-High { color: var(--warning); }
+.priority-Urgent { color: var(--danger); font-weight: 700; }
+
+/* ── Toast notifications ── */
+#toast-stack {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 340px;
+}
+
+.toast {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-bright);
+  border-left: 3px solid var(--signal-cyan);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  font-size: 0.87rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  animation: toast-in 0.25s ease;
+}
+.toast.toast-error { border-left-color: var(--danger); }
+.toast.toast-success { border-left-color: var(--success); }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Loading spinner ── */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Empty states ── */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-state svg { opacity: 0.5; margin-bottom: 16px; }
+.empty-state h3 { color: var(--text-secondary); font-family: var(--font-body); margin: 0 0 6px; }
